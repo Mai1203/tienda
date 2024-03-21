@@ -22,10 +22,11 @@ import {
   ColorMapping,
 } from "./pages";
 import "./App.css";
+import { useStateContext } from "./contexts/ContextProvider";
 import Financial from "./pages/Charts/Financial";
 
 export const App = () => {
-  const activeMenu = true;
+  const activeMenu = useStateContext();
   return (
     <BrowserRouter>
       <div className="flex relative dark:bg-main-dark-bg">
@@ -42,10 +43,12 @@ export const App = () => {
         </div>
         {activeMenu ? (
           <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-            <Sidebar/>
+            <Sidebar />
           </div>
         ) : (
-          <div className="w-0 dark:bg-secondary-dark-bg"><Sidebar/></div>
+          <div className="w-0 dark:bg-secondary-dark-bg">
+            <Sidebar />
+          </div>
         )}
         <div
           className={`dark:bg-main-bg bg-main-bg min-h-screen w-full ${
@@ -53,7 +56,7 @@ export const App = () => {
           }`}
         >
           <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar">
-            <Navbar/>
+            <Navbar />
           </div>
           {/* ---- */}
           <div>
@@ -83,7 +86,6 @@ export const App = () => {
           </div>
         </div>
       </div>
-
     </BrowserRouter>
   );
 };
