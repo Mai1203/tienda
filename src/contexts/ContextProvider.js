@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from 'react'
 
 const StateContext = createContext()
 
+// eslint-disable-next-line no-unused-vars
 const initialState = {
   chat: false,
   cart: false,
@@ -11,11 +12,18 @@ const initialState = {
 
 export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true)
+  const [isClicked, setIsClicked] = useState(initialState)
+  const handleClick = (clicked) => {
+    setIsClicked({ ...initialState, [clicked]: true })
+  }
   return (
     <StateContext.Provider
       value={{
         activeMenu,
-        setActiveMenu
+        setActiveMenu,
+        isClicked,
+        setIsClicked,
+        handleClick
       }}
     >
       {children}
