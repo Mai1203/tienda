@@ -6,12 +6,19 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups'
 
 import { links } from '../data/dummy'
 import { useStateContext } from '../contexts/ContextProvider'
+
 const activeLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2'
 
 const normalLink = 'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hoover:text-black hoover:bg-light-gray m-2'
 
 function Sidebar () {
-  const { activeMenu, setActiveMenu } = useStateContext()
+  const { activeMenu, setActiveMenu, screenSize } = useStateContext()
+
+  const handleCloseSidebar = () => {
+    if (activeMenu && screenSize <= 700) {
+      setActiveMenu(false)
+    }
+  }
 
   return (
     <div className='ml-3 h-screen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10'>
@@ -49,7 +56,7 @@ function Sidebar () {
                   <NavLink
                     to={`/${Link.name}`}
                     key={Link.name}
-                    onClick={() => { }}
+                    onClick={handleCloseSidebar}
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink}
                   >
